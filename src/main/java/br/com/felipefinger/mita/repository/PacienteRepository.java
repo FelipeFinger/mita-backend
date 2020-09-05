@@ -14,6 +14,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long>{
 	List<Paciente> findAllByOrderByIdDesc();
 	
 	@Query("select p from Paciente p where p.nome LIKE %?1%")
-	List<Paciente> findPacienteByName(String nome);
+	List<Paciente> findPacienteByNameOrderByName(String nome);
 
 }

@@ -22,18 +22,17 @@ public class PacienteResource {
 	@Autowired
 	PacienteRepository pacienteRepository;
 	
-	@GetMapping("/adquirirTodos")
-	public List<Paciente> adquirirTodos(){
+	@GetMapping("/adquirir")
+	public List<Paciente> adquirir(String nome){
 		
-		return pacienteRepository.findAllByOrderByIdDesc();
+		if(nome == null) {
+			
+			return pacienteRepository.findAllByOrderByIdDesc();	
+		}
+		 	 
+		return pacienteRepository.findPacienteByNameOrderByName(nome.toUpperCase());
 	}
-	
-	@GetMapping("/pesquisar")
-	public List<Paciente> pesquisar(String nome){
-		
-		return pacienteRepository.findPacienteByName(nome.toUpperCase());
-	}
-	
+
 	@GetMapping("/adquirir/{id}")
 	public Paciente adquirir(@PathVariable(value = "id") long id){
 		
@@ -56,6 +55,7 @@ public class PacienteResource {
 	@PutMapping("/atualizar")
 	public Paciente atualizar(@RequestBody Paciente paciente) {
 		
+		paciente.setNome(paciente.getNome().toUpperCase());
 		return pacienteRepository.save(paciente);
 	}
 }
