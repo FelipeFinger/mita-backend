@@ -24,26 +24,38 @@ public class PacienteResource {
 	
 	@GetMapping("/adquirirTodos")
 	public List<Paciente> adquirirTodos(){
-		return pacienteRepository.findAll();
+		
+		return pacienteRepository.findAllByOrderByIdDesc();
+	}
+	
+	@GetMapping("/pesquisar")
+	public List<Paciente> pesquisar(String nome){
+		
+		return pacienteRepository.findPacienteByName(nome.toUpperCase());
 	}
 	
 	@GetMapping("/adquirir/{id}")
 	public Paciente adquirir(@PathVariable(value = "id") long id){
+		
 		return pacienteRepository.findById(id);
 	}
 	
 	@PostMapping("/salvar")
 	public Paciente salvar(@RequestBody Paciente paciente){
+		
+		paciente.setNome(paciente.getNome().toUpperCase());
 		return pacienteRepository.save(paciente);
 	}
 	
-	@DeleteMapping("/excluir")
-	public void excluir(@RequestBody Paciente paciente){
-		pacienteRepository.delete(paciente);
+	@DeleteMapping("/excluir/{id}")
+	public void excluir(@PathVariable(value = "id") long id){
+		
+		pacienteRepository.delete(pacienteRepository.findById(id));
 	}
 	
 	@PutMapping("/atualizar")
 	public Paciente atualizar(@RequestBody Paciente paciente) {
+		
 		return pacienteRepository.save(paciente);
 	}
 }
