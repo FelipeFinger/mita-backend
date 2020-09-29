@@ -1,4 +1,4 @@
-package br.com.felipefinger.mita.resources;
+package br.com.felipefinger.mita.controller;
 
 import java.util.List;
 
