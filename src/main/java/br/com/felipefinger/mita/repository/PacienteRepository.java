@@ -13,7 +13,10 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long>{
 	
 	List<Paciente> findAllByOrderByIdDesc();
 	
-	@Query("select p from Paciente p where p.nome LIKE %?1%")
+	@Query("select p from Paciente p where lower(p.nome) like lower(concat('%', ?1,'%')) order by p.nome")	
 	List<Paciente> findPacienteByNameOrderByName(String nome);
+	
+	@Query("select p from Paciente p where lower(p.cpf) like lower(concat('%', ?1,'%')) order by p.nome")	
+	List<Paciente> findPacienteByCpfOrderByName(String cpf);
 
 }

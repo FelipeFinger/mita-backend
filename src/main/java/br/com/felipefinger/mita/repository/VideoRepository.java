@@ -13,7 +13,7 @@ public interface VideoRepository extends JpaRepository<Video, Long>{
 	
 	List<Video> findAllByOrderByIdDesc();
 	
-	@Query("select v from Video v where v.titulo LIKE %?1%")
+	@Query("select v from Video v where lower(v.titulo) like lower(concat('%', ?1,'%'))")
 	List<Video> findVideoByTituloOrderByTitulo(String titulo);
 
 }

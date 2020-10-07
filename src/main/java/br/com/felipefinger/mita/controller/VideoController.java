@@ -37,7 +37,7 @@ public class VideoController {
 			return videoRepository.findAllByOrderByIdDesc();	
 		}
 		 	 
-		return videoRepository.findVideoByTituloOrderByTitulo(titulo.toUpperCase());
+		return videoRepository.findVideoByTituloOrderByTitulo(titulo);
 	}
 
 	@GetMapping("/adquirir/{id}")

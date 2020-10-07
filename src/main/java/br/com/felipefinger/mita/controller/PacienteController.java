@@ -14,23 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.felipefinger.mita.models.Paciente;
 import br.com.felipefinger.mita.repository.PacienteRepository;
+import br.com.felipefinger.mita.service.PacienteService;
 
 @RestController
 @RequestMapping(value = "/pacientes")
-public class PacienteResource {
+public class PacienteController {
 
 	@Autowired
 	PacienteRepository pacienteRepository;
+
+	@Autowired
+	PacienteService pacienteService;
 	
 	@GetMapping("/adquirir")
-	public List<Paciente> adquirir(String nome){
+	public List<Paciente> adquirir(String busca){
 		
-		if(nome == null) {
+		if(busca == null) {
 			
 			return pacienteRepository.findAllByOrderByIdDesc();	
 		}
 		 	 
-		return pacienteRepository.findPacienteByNameOrderByName(nome.toUpperCase());
+		return pacienteService.adquirirBusca(busca);
 	}
 
 	@GetMapping("/adquirir/{id}")
@@ -40,10 +44,9 @@ public class PacienteResource {
 	}
 	
 	@PostMapping("/salvar")
-	public Paciente salvar(@RequestBody Paciente paciente){
-		
-		paciente.setNome(paciente.getNome().toUpperCase());
-		return pacienteRepository.save(paciente);
+	public Paciente salvar(@RequestBody Paciente paciente) throws Exception{
+				
+		return pacienteService.salvar(paciente);
 	}
 	
 	@DeleteMapping("/excluir/{id}")
