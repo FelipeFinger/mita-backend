@@ -36,11 +36,19 @@ public class PacienteController {
 		 	 
 		return pacienteService.adquirirBusca(busca);
 	}
+	
+	@GetMapping("/adquirirNome/{id}")
+	public String adquirirNome(@PathVariable(value = "id") long id){
+	 
+		return pacienteService.adquirirNome(id);
+	}
 
 	@GetMapping("/adquirir/{id}")
 	public Paciente adquirir(@PathVariable(value = "id") long id){
 		
-		return pacienteRepository.findById(id);
+		Paciente paciente = pacienteRepository.findById(id);
+		
+		return paciente;
 	}
 	
 	@PostMapping("/salvar")

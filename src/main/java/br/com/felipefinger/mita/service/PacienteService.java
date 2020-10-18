@@ -1,6 +1,7 @@
 package br.com.felipefinger.mita.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,31 @@ public class PacienteService {
 	public Paciente salvar(Paciente paciente) throws Exception{
 		
 		paciente.setNome(this.formatarNome(paciente.getNome()));
+		
+		if(paciente.getEvaAtual() == null) {
+			
+			paciente.setEvaAtual(paciente.getEva());
+		}
 
 		return pacienteRepository.save(paciente);
 	}	
+	
+	public void atualizarEva(Long codigoPaciente, Long eva) throws Exception{
+		
+		Optional<Paciente> paciente = pacienteRepository.findById(codigoPaciente);
+		
+		if(paciente.isPresent()) {
+			
+			paciente.get().setEvaAtual(eva);
+			pacienteRepository.save(paciente.get());
+		}
+
+	}
+	
+	public String adquirirNome(Long codigoPaciente) {
+		
+		return pacienteRepository.findNameById(codigoPaciente);
+	}
 	
 	private String formatarNome(String nomeCompleto) {
 		

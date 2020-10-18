@@ -116,7 +116,7 @@ public class UploadVideoService {
 	      System.out.println("  - Tags: " + returnedVideo.getSnippet().getTags());
 	      System.out.println("  - Privavidade: " + returnedVideo.getStatus().getPrivacyStatus());
 
-	      return ("https://youtube.com/watch?v=" + returnedVideo.getId());
+	      return ("https://www.youtube.com/embed/" + returnedVideo.getId());
 	      
 	    } catch (GoogleJsonResponseException e) {
 	    	

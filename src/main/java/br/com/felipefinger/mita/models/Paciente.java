@@ -35,6 +35,8 @@ public class Paciente implements Serializable {
 	private String medicamentosUtilizados;
 	
 	private Long eva;
+	
+	private Long evaAtual;
 
 	private String observacoes;
 
@@ -116,6 +118,14 @@ public class Paciente implements Serializable {
 
 	public void setEva(Long eva) {
 		this.eva = eva;
+	}
+
+	public Long getEvaAtual() {
+		return evaAtual;
+	}
+
+	public void setEvaAtual(Long evaAtual) {
+		this.evaAtual = evaAtual;
 	}
 
 	public String getObservacoes() {

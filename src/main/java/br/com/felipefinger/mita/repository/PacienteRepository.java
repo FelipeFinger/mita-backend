@@ -18,5 +18,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long>{
 	
 	@Query("select p from Paciente p where lower(p.cpf) like lower(concat('%', ?1,'%')) order by p.nome")	
 	List<Paciente> findPacienteByCpfOrderByName(String cpf);
+	
+	@Query("select p.nome from Paciente p where p.id = ?1")	
+	String findNameById(Long id);
 
 }
