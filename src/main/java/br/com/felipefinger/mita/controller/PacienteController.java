@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.felipefinger.mita.dto.PacienteDTO;
 import br.com.felipefinger.mita.models.Paciente;
 import br.com.felipefinger.mita.repository.PacienteRepository;
 import br.com.felipefinger.mita.service.PacienteService;
@@ -25,47 +26,40 @@ public class PacienteController {
 
 	@Autowired
 	PacienteService pacienteService;
-	
+
 	@GetMapping("/adquirir")
-	public List<Paciente> adquirir(String busca){
-		
-		if(busca == null) {
-			
-			return pacienteRepository.findAllByOrderByIdDesc();	
-		}
-		 	 
+	public List<Paciente> adquirir(String busca) {
+
 		return pacienteService.adquirirBusca(busca);
 	}
-	
+
 	@GetMapping("/adquirirNome/{id}")
-	public String adquirirNome(@PathVariable(value = "id") long id){
-	 
+	public String adquirirNome(@PathVariable(value = "id") long id) throws Exception {
+
 		return pacienteService.adquirirNome(id);
 	}
 
 	@GetMapping("/adquirir/{id}")
-	public Paciente adquirir(@PathVariable(value = "id") long id){
-		
-		Paciente paciente = pacienteRepository.findById(id);
-		
-		return paciente;
+	public PacienteDTO adquirir(@PathVariable(value = "id") long id) throws Exception {
+
+		return pacienteService.adquirir(id);
 	}
-	
+
 	@PostMapping("/salvar")
-	public Paciente salvar(@RequestBody Paciente paciente) throws Exception{
-				
+	public Paciente salvar(@RequestBody Paciente paciente) throws Exception {
+
 		return pacienteService.salvar(paciente);
 	}
-	
+
 	@DeleteMapping("/excluir/{id}")
-	public void excluir(@PathVariable(value = "id") long id){
-		
+	public void excluir(@PathVariable(value = "id") long id) {
+
 		pacienteRepository.delete(pacienteRepository.findById(id));
 	}
-	
+
 	@PutMapping("/atualizar")
 	public Paciente atualizar(@RequestBody Paciente paciente) {
-		
+
 		paciente.setNome(paciente.getNome().toUpperCase());
 		return pacienteRepository.save(paciente);
 	}

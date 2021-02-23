@@ -24,7 +24,7 @@ public class SessaoController {
 	SessaoService sessaoService;
 
 	@GetMapping("/adquirir/{id}")
-	public SessaoDTO adquirir(@PathVariable(value = "id") long codigoPaciente){
+	public SessaoDTO adquirir(@PathVariable(value = "id") long codigoPaciente) throws Exception{
 		
 		return sessaoService.adquirir(codigoPaciente);
 	}

@@ -8,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
+@Data
 @Table(name = "TB_SESSAO")
 public class Sessao implements Serializable {
 
@@ -27,57 +30,4 @@ public class Sessao implements Serializable {
 	private Long eva;
 	
 	private String observacoes;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getCodigoPaciente() {
-		return codigoPaciente;
-	}
-
-	public void setCodigoPaciente(long codigoPaciente) {
-		this.codigoPaciente = codigoPaciente;
-	}
-	public Long getNumeroSessao() {
-		return numeroSessao;
-	}
-
-	public void setNumeroSessao(Long numeroSessao) {
-		this.numeroSessao = numeroSessao;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public Long getEva() {
-		return eva;
-	}
-
-	public void setEva(Long eva) {
-		this.eva = eva;
-	}
-
-	public String getObservacoes() {
-		return observacoes;
-	}
-
-	public void setObservacoes(String observacoes) {
-		this.observacoes = observacoes;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	
 }
