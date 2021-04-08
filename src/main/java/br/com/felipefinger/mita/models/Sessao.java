@@ -25,6 +25,8 @@ public class Sessao implements Serializable {
 
 	private Long numeroSessao;
 	
+	private String fisioterapeuta;
+	
 	private String data;
 	
 	private Long eva;

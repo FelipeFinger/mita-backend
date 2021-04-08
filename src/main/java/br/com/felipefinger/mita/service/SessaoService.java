@@ -1,5 +1,8 @@
 package br.com.felipefinger.mita.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +36,18 @@ public class SessaoService {
 
 		Optional<Sessao> optionalSessao = sessaoRepository
 				.findTopByCodigoPacienteOrderByNumeroSessaoDesc(sessao.getCodigoPaciente());
+		
+		Date dataAtual = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        sessao.setData(dateFormat.format(dataAtual));
 
-		if (!optionalSessao.isPresent()) {
+		if (optionalSessao.isPresent()) {
+			
+			sessao.setNumeroSessao(optionalSessao.get().getNumeroSessao() + 1L);
+		} else {
 
-			sessao.setNumeroSessao(0L);
+			sessao.setNumeroSessao(1L);
 		}
-
-		sessao.setNumeroSessao(optionalSessao.get().getNumeroSessao() + 1L);
 
 		return sessaoRepository.save(sessao);
 	}
